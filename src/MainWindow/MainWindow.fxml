@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:controller="MainWindow.MainWindowController" fx:id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="1168.0" styleClass="titleText" stylesheets="@MainWindowStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="anchorPane" layoutX="269.0" layoutY="-3.0" prefHeight="731.0" prefWidth="895.0">
+         <children>
+            <Text fill="#5f8d4a" layoutX="324.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐIỂM DANH" textAlignment="CENTER" wrappingWidth="258.73828125" />
+            <JFXTreeTableView fx:id="" layoutY="59.0" prefHeight="677.0" prefWidth="900.0">
+               <columns>
+                  <TreeTableColumn prefWidth="363.0" text="Họ và Tên" />
+               </columns>
+            </JFXTreeTableView>
+         </children>
+      </AnchorPane>
+      <JFXDatePicker fx:id="datePicker" layoutX="-5.0" layoutY="56.0" prefHeight="65.0" prefWidth="274.0" />
+   </children>
+</AnchorPane>
