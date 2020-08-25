@@ -3,28 +3,37 @@ package MainWindow;
 import Student.Student;
 import com.fazecast.jSerialComm.SerialPort;
 import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableRow;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
     @FXML
+    private TableView<Student> mainTableView;
+    @FXML
     private JFXDatePicker datePicker;
     @FXML
-    private JFXTreeTableColumn<Student,String> jfxTreeTableColumnName;
+    private TableColumn<Student,String> jfxTreeTableColumnName;
     @FXML
     private AnchorPane anchorPane;
     @FXML
+    private AnchorPane subAnchorPane;
+    @FXML
     private TextField hiddenTextField;
-
+    @FXML
+    private Button clickTorRead;
 
     public void onChange() {
         StringProperty data = new SimpleStringProperty();
@@ -35,28 +44,39 @@ public class MainWindowController implements Initializable {
         System.out.println("This is response string: " + data.toString());
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //getSerialPort
+    private void readCard() {
+        System.out.println("du");
         SerialPort sp = SerialPort.getCommPort("COM4");
-        sp.setComPortParameters(9600,8,1,0);
-        sp.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING,0,0);
-
-        if(sp.openPort()) {
-            /*
-            * Do some fuckin stuff, begin binding hiddenTextField Changing*/
-            hiddenTextField.setText(hexToAscii("4A"));
-
+        System.out.println(sp);
+        sp.setComPortParameters(9600, 8, 1, 0);
+        sp.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 0, 0);
+        if (sp.openPort()) {
+            System.out.println("oke");
         } else {
-            System.out.println("Some thing went wrong");
+            System.out.println("No oke");
+            return;
         }
-
-//        while(true) {
-//
-//            hiddenTextField.setText(sc.nextLine());
-//        }
+        byte[] res = new byte[2048];
+        try {
+            for (; ; ) {
+                sp.getInputStream().read(res);
+                System.out.println(Arrays.toString(res));
+                System.out.println("end");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        mainTableView.prefHeightProperty().bind(anchorPane.heightProperty());
+        mainTableView.prefWidthProperty().bind(anchorPane.widthProperty());
+        jfxTreeTableColumnName.prefWidthProperty().bind(mainTableView.widthProperty());
+        jfxTreeTableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+    }
 
     private static String hexToAscii(String hexStr) {
         StringBuilder output = new StringBuilder("");

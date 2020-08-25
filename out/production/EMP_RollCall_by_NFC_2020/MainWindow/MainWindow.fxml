@@ -2,23 +2,26 @@
 
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:controller="MainWindow.MainWindowController" fx:id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="1168.0" styleClass="titleText" stylesheets="@MainWindowStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="1168.0" styleClass="titleText" stylesheets="@MainWindowStyleSheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow.MainWindowController">
    <children>
-      <AnchorPane fx:id="anchorPane" layoutX="269.0" layoutY="-3.0" prefHeight="731.0" prefWidth="895.0">
+      <AnchorPane fx:id="subAnchorPane" layoutX="269.0" layoutY="-3.0" prefHeight="731.0" prefWidth="895.0">
          <children>
             <Text fill="#5f8d4a" layoutX="324.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐIỂM DANH" textAlignment="CENTER" wrappingWidth="258.73828125" />
-            <JFXTreeTableView layoutY="59.0" prefHeight="677.0" prefWidth="900.0">
+            <TableView fx:id="mainTableView" layoutY="59.0" prefHeight="672.0" prefWidth="893.0">
                <columns>
-                  <TreeTableColumn prefWidth="363.0" text="Họ và Tên" />
+                  <TableColumn fx:id="jfxTreeTableColumnName" prefWidth="335.0" text="Họ và Tên" />
                </columns>
-            </JFXTreeTableView>
+            </TableView>
          </children>
       </AnchorPane>
-      <JFXDatePicker layoutX="-5.0" layoutY="56.0" prefHeight="65.0" prefWidth="274.0" />
+      <JFXDatePicker fx:id="datePicker" layoutX="-5.0" layoutY="56.0" prefHeight="65.0" prefWidth="274.0" />
+      <Button fx:id="clickTorRead" layoutX="67.0" layoutY="179.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="132.0" text="Button" />
    </children>
 </AnchorPane>
